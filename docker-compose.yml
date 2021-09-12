@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+    vuex-fe-image:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: vuex-fe-container
+        ports:
+            - '8081:8081'
