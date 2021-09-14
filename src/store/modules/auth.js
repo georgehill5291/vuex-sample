@@ -1,7 +1,7 @@
 import axios from 'axios'
 import router from '../../router'
-import constUtil from '../../util/constUtil'
 import setAuthToken from './../../util/setAuthToken'
+import { apiUrl, AUTH_KEY_TOKEN } from '../../util/constUtil'
 
 const state = {
     auth: {
@@ -17,7 +17,7 @@ const actions = {
     async login({ commit }, loginInput) {
         try {
             const response = await axios.post(
-                `${process.env.VUE_APP_PROD_API_URL}/auth/login`,
+                `${apiUrl}/auth/login`,
                 loginInput
             )
             commit('LOGIN', response.data)
@@ -27,14 +27,12 @@ const actions = {
     },
 
     async loadUser({ commit }) {
-        if (localStorage[constUtil.AUTH_TOKEN_KEY]) {
-            setAuthToken(localStorage[constUtil.AUTH_TOKEN_KEY])
+        if (localStorage[AUTH_KEY_TOKEN]) {
+            setAuthToken(localStorage[AUTH_KEY_TOKEN])
         }
 
         try {
-            const response = await axios.get(
-                `${process.env.VUE_APP_PROD_API_URL}/auth`
-            )
+            const response = await axios.get(`${apiUrl}/auth`)
             commit('LOAD_USER', response.data)
         } catch (error) {
             console.log(error)
@@ -42,7 +40,7 @@ const actions = {
     },
 
     async logout({ commit }) {
-        localStorage.removeItem(constUtil.AUTH_TOKEN_KEY)
+        localStorage.removeItem(AUTH_KEY_TOKEN)
         commit('LOGOUT')
     }
 }
@@ -54,10 +52,7 @@ const mutations = {
     LOGIN(state, response) {
         if (response.success) {
             state.auth.isAuthenticated = response.success
-            localStorage.setItem(
-                constUtil.AUTH_TOKEN_KEY,
-                response.data.accessToken
-            )
+            localStorage.setItem(AUTH_KEY_TOKEN, response.data.accessToken)
             router.push('/portal')
         }
     },
