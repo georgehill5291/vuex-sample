@@ -1,6 +1,5 @@
 import axios from 'axios'
 import router from '../../router'
-import { apiUrl } from '../../util/constUtil'
 
 const blogModule = {
     state: {
@@ -14,7 +13,9 @@ const blogModule = {
     actions: {
         async getBlogs({ commit }) {
             try {
-                const response = await axios.get(`${apiUrl}/blogs`)
+                const response = await axios.get(
+                    `${process.env.VUE_APP_PROD_API_URL}/blogs`
+                )
                 commit('GET_BLOGS', response.data)
             } catch (error) {
                 console.log('error', error)
@@ -22,7 +23,10 @@ const blogModule = {
         },
         async addBlog({ commit }, blogInput) {
             try {
-                const response = await axios.post(`${apiUrl}/blogs`, blogInput)
+                const response = await axios.post(
+                    `${process.env.VUE_APP_PROD_API_URL}/blogs`,
+                    blogInput
+                )
                 commit('ADD_BLOG', response.data)
             } catch (error) {
                 console.log('error', error)
@@ -30,7 +34,9 @@ const blogModule = {
         },
         async findBlogById({ commit }, blogId) {
             try {
-                const response = await axios.get(`${apiUrl}/blogs/${blogId}`)
+                const response = await axios.get(
+                    `${process.env.VUE_APP_PROD_API_URL}/blogs/${blogId}`
+                )
                 commit('FIND_BLOG_BY_ID', response.data)
             } catch (error) {
                 console.log('error', error)
@@ -39,7 +45,7 @@ const blogModule = {
         async updateBlogById({ commit }, blogUpdateInput) {
             try {
                 const response = await axios.put(
-                    `${apiUrl}/blogs/${blogUpdateInput._id}`,
+                    `${process.env.VUE_APP_PROD_API_URL}/blogs/${blogUpdateInput._id}`,
                     blogUpdateInput
                 )
                 commit('UPDATE_BLOG_BY_ID', response.data)
@@ -49,7 +55,9 @@ const blogModule = {
         },
         async deleteBlog({ commit }, blogId) {
             try {
-                await axios.delete(`${apiUrl}/blogs/${blogId}`)
+                await axios.delete(
+                    `${process.env.VUE_APP_PROD_API_URL}/blogs/${blogId}`
+                )
                 commit('DELETE_BLOG', blogId)
             } catch (error) {
                 console.log('error', error)
