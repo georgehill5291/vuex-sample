@@ -4,7 +4,7 @@
             <form @submit="onSubmit">
                 <h3 class="text-white">Sign In</h3>
 
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label>Username</label>
                     <input
                         type="text"
@@ -13,7 +13,7 @@
                     />
                 </div>
 
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label>Password</label>
                     <input
                         type="password"

@@ -5,23 +5,7 @@
     </div>
 </template>
 
-<script>
-import { mapActions, mapGetters } from 'vuex'
-export default {
-    created() {
-        this.loadUser()
-    },
-    computed: {
-        ...mapGetters(['isAuthenticated']),
-        isAuthPage() {
-            return this.$route.name === 'Login'
-        }
-    },
-    methods: {
-        ...mapActions(['loadUser', 'logout'])
-    }
-}
-</script>
+<script></script>
 
 <style>
 #app {

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import router from '../../router'
-import { authName } from '../../util/constant'
+import constUtil from '../../util/constUtil'
 import setAuthToken from './../../util/setAuthToken'
 
 const state = {
@@ -27,8 +27,8 @@ const actions = {
     },
 
     async loadUser({ commit }) {
-        if (localStorage[authName]) {
-            setAuthToken(localStorage[authName])
+        if (localStorage[constUtil.AUTH_TOKEN_KEY]) {
+            setAuthToken(localStorage[constUtil.AUTH_TOKEN_KEY])
         }
 
         try {
@@ -42,7 +42,7 @@ const actions = {
     },
 
     async logout({ commit }) {
-        localStorage.removeItem(authName)
+        localStorage.removeItem(constUtil.AUTH_TOKEN_KEY)
         commit('LOGOUT')
     }
 }
@@ -54,13 +54,18 @@ const mutations = {
     LOGIN(state, response) {
         if (response.success) {
             state.auth.isAuthenticated = response.success
-            localStorage.setItem(authName, response.data.accessToken)
+            localStorage.setItem(
+                constUtil.AUTH_TOKEN_KEY,
+                response.data.accessToken
+            )
             router.push('/portal')
         }
     },
     LOAD_USER(state, response) {
         if (response.success) {
             state.auth.isAuthenticated = response.success
+        } else {
+            router.push('/login')
         }
     },
     LOGOUT(state) {

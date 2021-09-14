@@ -9,14 +9,11 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 export default {
-    created() {
-        this.loadUser()
-    },
     computed: {
         ...mapGetters(['isAuthenticated'])
     },
     methods: {
-        ...mapActions(['loadUser', 'logout'])
+        ...mapActions(['logout'])
     }
 }
 </script>

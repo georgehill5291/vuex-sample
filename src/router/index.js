@@ -10,6 +10,10 @@ import About from '../views/About.vue'
 import Home from '../views/Home.vue'
 import SampleVuex from '../views/SampleVuex.vue'
 import BlogListing from '../views/BlogListing.vue'
+import AddBlog from '../components/Blogs/AddBlog'
+import EditBlog from '../components/Blogs/EditBlog'
+import ViewBlog from '../components/Blogs/ViewBlog'
+// import { isLoggedIn } from "../util/authCommon";
 
 Vue.use(VueRouter)
 
@@ -25,12 +29,26 @@ const routes = [
             {
                 name: 'Home',
                 path: '',
-                component: Home
+                component: Home,
+                meta: {
+                    allowAnonymous: true
+                }
             },
             {
                 name: 'About',
                 path: 'about',
-                component: About
+                component: About,
+                meta: {
+                    allowAnonymous: true
+                }
+            },
+            {
+                name: 'ViewBlog',
+                path: '/blogs/:id',
+                component: ViewBlog,
+                meta: {
+                    allowAnonymous: true
+                }
             }
         ]
     },
@@ -51,14 +69,24 @@ const routes = [
         },
         children: [
             {
-                name: 'sample-vuex',
+                name: 'SampleVuex',
                 path: 'sample-vuex',
                 component: SampleVuex
             },
             {
-                name: 'blog-listing',
+                name: 'BlogListing',
                 path: 'blog-listing',
                 component: BlogListing
+            },
+            {
+                name: 'EditBlog',
+                path: 'blog-listing/edit/:id',
+                component: EditBlog
+            },
+            {
+                name: 'AddBlog',
+                path: 'blog-listing/add',
+                component: AddBlog
             }
         ]
     }
@@ -70,20 +98,22 @@ const router = new VueRouter({
     routes
 })
 
-// router.beforeEach((to, from, next) => {
-//     if (to.name == 'Login' && router.app.$store.getters.isAuthenticated) {
-//         next({ path: '/' })
-//     } else if (
-//         !to.meta.allowAnonymous &&
-//         !router.app.$store.getters.isAuthenticated
-//     ) {
-//         next({
-//             path: '/login',
-//             query: { redirect: to.fullPath }
-//         })
-//     } else {
-//         next()
-//     }
-// })
+router.beforeResolve(async (to, from, next) => {
+    await Vue.nextTick()
+    await router.app.$store.dispatch('loadUser')
+    if (to.name == 'Login' && router.app.$store.getters.isAuthenticated) {
+        next({ path: '/portal' })
+    } else if (
+        !to.meta.allowAnonymous &&
+        !router.app.$store.getters.isAuthenticated
+    ) {
+        next({
+            path: '/login',
+            query: { redirect: to.fullPath }
+        })
+    } else {
+        next()
+    }
+})
 
 export default router

@@ -10,7 +10,7 @@
     "dependencies": {
         "@babel/polyfill": "^7.11.5",
         "axios": "^0.21.4",
-        "bootstrap": "^5.1.1",
+        "bootstrap": "4",
         "bootstrap-vue": "^2.21.2",
         "core-js": "^3.6.5",
         "mutationobserver-shim": "^0.3.7",
@@ -22,6 +22,8 @@
         "vuex": "^3.6.2"
     },
     "devDependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^29.2.0",
+        "@ckeditor/ckeditor5-vue2": "^1.0.5",
         "@vue/cli-plugin-babel": "~4.5.0",
         "@vue/cli-plugin-eslint": "~4.5.0",
         "@vue/cli-plugin-router": "~4.5.0",
