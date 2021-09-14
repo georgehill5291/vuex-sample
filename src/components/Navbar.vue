@@ -1,13 +1,7 @@
 <template>
     <div class="navbar">
         <h1>My Vuex</h1>
-        <ul>
-            <li>
-                Home
-            </li>
-            <li>
-                About
-            </li>
+        <!-- <ul>
             <li v-if="isAuthenticated">
                 Total: {{ todos.length }}
                 <button @click="TOGGLE_AUTH">Logout</button>
@@ -15,7 +9,7 @@
             <li v-else>
                 <button @click="TOGGLE_AUTH">Login</button>
             </li>
-        </ul>
+        </ul> -->
     </div>
 </template>
 
