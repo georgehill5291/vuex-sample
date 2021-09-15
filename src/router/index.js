@@ -100,7 +100,9 @@ const router = new VueRouter({
 
 router.beforeResolve(async (to, from, next) => {
     await Vue.nextTick()
-    await router.app.$store.dispatch('loadUser')
+    if (!to.meta.allowAnonymous && !router.app.$store.getters.isAuthenticated) {
+        await router.app.$store.dispatch('loadUser')
+    }
     if (to.name == 'Login' && router.app.$store.getters.isAuthenticated) {
         next({ path: '/portal' })
     } else if (
