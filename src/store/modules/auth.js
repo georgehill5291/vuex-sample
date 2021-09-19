@@ -59,6 +59,7 @@ const mutations = {
                 constUtil.AUTH_TOKEN_KEY,
                 response.data.accessToken
             )
+            setAuthToken(response.data.accessToken)
             router.push('/portal')
         }
     },
