@@ -1,19 +1,21 @@
 <template>
-    <div>
+    <div class="public-blogs">
         <h3>Blogs</h3>
-        <div class="d-flex p-2 text-left" v-for="blog in blogs" :key="blog.id">
-            <div>
-                <div>{{ blog.title }}</div>
-                <div
-                    v-html="$options.filters.truncate(blog.description, 20)"
-                ></div>
-            </div>
-            <div class="p-2 ml-auto my-auto">
-                <router-link :to="`/blogs/${blog._id}`" class="mr-2">
-                    <button>
-                        <b-icon icon="eye"></b-icon>
-                    </button>
-                </router-link>
+        <div v-for="blog in blogs" :key="blog.id">
+            <div class="d-flex text-left blog-item">
+                <div class="p-2">
+                    <div class="h4">{{ blog.title }}</div>
+                    <div
+                        v-html="$options.filters.truncate(blog.description, 20)"
+                    ></div>
+                </div>
+                <div class="view-button-wrapper">
+                    <router-link :to="`/blogs/${blog._id}`">
+                        <div class="view-button">
+                            <b-icon icon="eye"></b-icon>
+                        </div>
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>
@@ -33,4 +35,28 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.blog-item {
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: 10px 10px;
+    height: 100px;
+}
+
+.view-button-wrapper {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.view-button {
+    width: 50px;
+    align-items: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 0 8px 8px 0;
+    background-color: #73d672;
+    color: black;
+}
+</style>

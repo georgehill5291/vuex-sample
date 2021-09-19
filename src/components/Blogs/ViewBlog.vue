@@ -1,7 +1,11 @@
 <template>
     <div class="text-left ml-3">
+        <h1>Blog</h1>
         <h2>{{ currentBlog.title }}</h2>
         <div v-html="currentBlog.description"></div>
+        <router-link :to="`/blogs`">
+            Back to Blogs
+        </router-link>
     </div>
 </template>
 
