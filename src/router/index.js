@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
+import PublicBlogs from '../views/Blogs/PublicBlogs'
 import Portal from '../views/template/Portal.vue'
 import PortalNav from '../components/shared/PortalNav.vue'
 import PublicNav from '../components/shared/PublicNav.vue'
@@ -38,6 +39,14 @@ const routes = [
                 name: 'About',
                 path: 'about',
                 component: About,
+                meta: {
+                    allowAnonymous: true
+                }
+            },
+            {
+                name: 'PublicBlogs',
+                path: '/blogs',
+                component: PublicBlogs,
                 meta: {
                     allowAnonymous: true
                 }

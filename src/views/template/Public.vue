@@ -1,6 +1,5 @@
 <template>
     <div class="public">
-        <h1>This is an Public template</h1>
         <!-- <div id="nav" v-if="!isAuthPage">
             <router-link to="/">Home</router-link> |
             <router-link to="/about">About</router-link> |     

@@ -3,7 +3,7 @@ import router from '../../router'
 
 const blogModule = {
     state: {
-        currentBlog: null,
+        currentBlog: { title: '', description: '' },
         blogs: []
     },
     getters: {
@@ -17,6 +17,16 @@ const blogModule = {
                     `${process.env.VUE_APP_PROD_API_URL}/blogs`
                 )
                 commit('GET_BLOGS', response.data)
+            } catch (error) {
+                console.log('error', error)
+            }
+        },
+        async getPublicBlogs({ commit }) {
+            try {
+                const response = await axios.get(
+                    `${process.env.VUE_APP_PROD_API_URL}/blogs/public`
+                )
+                commit('GET_PUBLIC_BLOGS', response.data)
             } catch (error) {
                 console.log('error', error)
             }
@@ -66,6 +76,9 @@ const blogModule = {
     },
     mutations: {
         GET_BLOGS(state, response) {
+            state.blogs = response.blogs
+        },
+        GET_PUBLIC_BLOGS(state, response) {
             state.blogs = response.blogs
         },
         ADD_BLOG(state, response) {
