@@ -10,6 +10,11 @@
                     ></div>
                 </div>
                 <div class="view-button-wrapper">
+                    <div @click="copyClipboard(blog._id)">
+                        <div class="link-button">
+                            <b-icon icon="link"></b-icon>
+                        </div>
+                    </div>
                     <router-link :to="`/blogs/${blog._id}`">
                         <div class="view-button">
                             <b-icon icon="eye"></b-icon>
@@ -30,7 +35,13 @@ export default {
         this.getPublicBlogs()
     },
     methods: {
-        ...mapActions(['getPublicBlogs'])
+        ...mapActions(['getPublicBlogs']),
+        copyClipboard(blogId) {
+            const full = location.protocol + '//' + location.host
+            var blogUrl = `${full}/blogs/${blogId}`
+            navigator.clipboard.writeText(blogUrl)
+            alert('Copied the text: ' + blogUrl)
+        }
     }
 }
 </script>
@@ -58,5 +69,21 @@ export default {
     border-radius: 0 8px 8px 0;
     background-color: #73d672;
     color: black;
+}
+
+.link-button {
+    width: 50px;
+    align-items: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 0;
+    background-color: #5f8daa;
+    color: black;
+}
+
+.view-button:hover,
+.link-button:hover {
+    color: white;
 }
 </style>
