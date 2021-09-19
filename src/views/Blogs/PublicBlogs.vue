@@ -40,7 +40,14 @@ export default {
             const full = location.protocol + '//' + location.host
             var blogUrl = `${full}/blogs/${blogId}`
             navigator.clipboard.writeText(blogUrl)
-            alert('Copied the text: ' + blogUrl)
+            navigator.clipboard.writeText('<empty clipboard>').then(
+                function() {
+                    alert('Copied the text: ' + blogUrl)
+                },
+                function() {
+                    alert('Copied the text failed')
+                }
+            )
         }
     }
 }
