@@ -39,10 +39,10 @@ export default {
         copyClipboard(blogId) {
             const full = location.protocol + '//' + location.host
             var blogUrl = `${full}/blogs/${blogId}`
-            navigator.clipboard.writeText(blogUrl)
             navigator.clipboard.writeText('<empty clipboard>').then(
                 function() {
                     alert('Copied the text: ' + blogUrl)
+                    navigator.clipboard.writeText(blogUrl)
                 },
                 function() {
                     alert('Copied the text failed')
