@@ -28,8 +28,7 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     background: rgb(219, 219, 219);
     /* margin: 20px auto; */
-    /* width: 90%;
-    max-width: 800px; */
+    width: 100%;
     text-align: center;
     color: #2c3e50;
 }

@@ -5,12 +5,14 @@ import setAuthToken from './../../util/setAuthToken'
 
 const state = {
     auth: {
-        isAuthenticated: false
+        isAuthenticated: false,
+        username: ''
     }
 }
 
 const getters = {
-    isAuthenticated: state => state.auth.isAuthenticated
+    isAuthenticated: state => state.auth.isAuthenticated,
+    username: state => state.auth.username
 }
 
 const actions = {
@@ -66,6 +68,7 @@ const mutations = {
     LOAD_USER(state, response) {
         if (response.success) {
             state.auth.isAuthenticated = response.success
+            state.auth.username = response.user.username
         } else {
             router.push('/login')
         }

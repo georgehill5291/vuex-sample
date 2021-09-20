@@ -1,13 +1,14 @@
 <template>
     <div class="home">
-        <img alt="Vue logo" src="../assets/logo.png" />
+        <CarouselBanner />
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import CarouselBanner from '@/components/Banner/CarouselBanner.vue'
 export default {
-    name: 'Home'
+    name: 'Home',
+    components: { CarouselBanner }
 }
 </script>

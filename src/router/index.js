@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import PublicBlogs from '../views/Blogs/PublicBlogs'
 import Portal from '../views/template/Portal.vue'
-import PortalNav from '../components/shared/PortalNav.vue'
+// import PortalNav from '../components/shared/PortalNav.vue'
 import PublicNav from '../components/shared/PublicNav.vue'
 import Public from '../views/template/Public.vue'
 import About from '../views/About.vue'
@@ -14,6 +14,8 @@ import BlogListing from '../views/BlogListing.vue'
 import AddBlog from '../components/Blogs/AddBlog'
 import EditBlog from '../components/Blogs/EditBlog'
 import ViewBlog from '../components/Blogs/ViewBlog'
+import PortalHeader from '../components/shared/PortalHeader.vue'
+import LeftNavbar from '../components/shared/LeftNavbar.vue'
 // import { isLoggedIn } from "../util/authCommon";
 
 Vue.use(VueRouter)
@@ -24,7 +26,7 @@ const routes = [
         name: 'Public',
         components: {
             default: Public,
-            navbar: PublicNav
+            header: PublicNav
         },
         children: [
             {
@@ -74,28 +76,28 @@ const routes = [
         name: 'Portal',
         components: {
             default: Portal,
-            navbar: PortalNav
+            header: PortalHeader
         },
         children: [
             {
                 name: 'SampleVuex',
                 path: 'sample-vuex',
-                component: SampleVuex
+                components: { default: SampleVuex, leftNavbar: LeftNavbar }
             },
             {
                 name: 'BlogListing',
                 path: 'blog-listing',
-                component: BlogListing
+                components: { default: BlogListing, leftNavbar: LeftNavbar }
             },
             {
                 name: 'EditBlog',
                 path: 'blog-listing/edit/:id',
-                component: EditBlog
+                components: { default: EditBlog, leftNavbar: LeftNavbar }
             },
             {
                 name: 'AddBlog',
                 path: 'blog-listing/add',
-                component: AddBlog
+                components: { default: AddBlog, leftNavbar: LeftNavbar }
             }
         ]
     }
