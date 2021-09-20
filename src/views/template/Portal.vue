@@ -13,7 +13,6 @@
 }
 .portal-container {
     margin-top: 60px;
-    display: flex;
     flex: 1;
 }
 </style>

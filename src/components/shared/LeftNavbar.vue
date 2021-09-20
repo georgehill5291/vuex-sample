@@ -34,7 +34,6 @@ export default {
     padding-top: 50px;
     width: 250px;
     height: 100vh;
-    display: table;
 }
 
 .left-item {
@@ -44,5 +43,14 @@ export default {
 
 .left-item a {
     color: white;
+}
+
+@media (max-width: 768px) {
+    .left-sidebar {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        display: none;
+    }
 }
 </style>

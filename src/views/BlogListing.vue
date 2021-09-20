@@ -1,5 +1,5 @@
 <template>
-    <div class="blog-listing mr-3">
+    <div class="blog-listing">
         <h3 class="text-left ml-4">Blog Lising</h3>
         <div class="text-left ml-4">
             <router-link to="/portal/blog-listing/add">
@@ -8,8 +8,38 @@
                 </div>
             </router-link>
         </div>
-        <div class="row" v-for="blog in blogs" :key="blog.id">
-            <div class="col">
+        <div
+            class="d-flex portal-blog-item"
+            v-for="blog in blogs"
+            :key="blog.id"
+        >
+            <div class="p-2 portal-blog-item-data">
+                <div class="h4">{{ blog.title }}</div>
+                <div
+                    v-html="$options.filters.truncate(blog.description, 100)"
+                ></div>
+            </div>
+            <div class="view-button-wrapper">
+                <router-link :to="`/blogs/${blog._id}`" class="mr-2">
+                    <button>
+                        <b-icon icon="eye"></b-icon>
+                    </button>
+                </router-link>
+                <router-link
+                    :to="`/portal/blog-listing/edit/${blog._id}`"
+                    class="mr-2"
+                >
+                    <button>
+                        <b-icon icon="pencil"></b-icon>
+                    </button>
+                </router-link>
+                <a href="javascript:void(0)">
+                    <button @click="deleteBlog(blog._id)">
+                        <b-icon icon="trash"></b-icon></button
+                ></a>
+            </div>
+
+            <!-- <div class="col pr-0">
                 <div class="card blog-card">
                     <div class="card-body">
                         <div class="d-flex flex-row">
@@ -46,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -67,6 +97,15 @@ export default {
 
 <style>
 .blog-card {
+    text-align: left;
+}
+
+.portal-blog-item {
+    flex: 1;
+}
+
+.portal-blog-item-data {
+    flex: 1;
     text-align: left;
 }
 </style>
