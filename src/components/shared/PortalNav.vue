@@ -10,7 +10,7 @@
             >
             <router-link to="/portal/sample-vuex">Sample Vuex</router-link>
             <router-link to="/portal/blog-listing">Blog</router-link>
-            <a href="javascript:void(0)" @click="logout()">Logout</a>
+            <a href="javascript:void(0)" @click="logout">Logout</a>
         </div>
     </div>
 </template>
@@ -22,13 +22,7 @@ export default {
         ...mapGetters(['isAuthenticated'])
     },
     methods: {
-        ...mapActions(['logout']),
-        openNav() {
-            document.getElementById('mySidenav').style.width = '250px'
-        },
-        closeNav() {
-            document.getElementById('mySidenav').style.width = '0'
-        }
+        ...mapActions(['logout'])
     }
 }
 </script>

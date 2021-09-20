@@ -45,12 +45,12 @@ export default {
     color: white;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .left-sidebar {
         position: absolute;
         width: 100vw;
         height: 100vh;
         display: none;
     }
-}
+} */
 </style>

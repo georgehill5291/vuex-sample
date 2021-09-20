@@ -47,8 +47,15 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
-    name: 'PortalHeader'
+    name: 'PortalHeader',
+    computed: {
+        ...mapGetters(['isAuthenticated'])
+    },
+    methods: {
+        ...mapActions(['logout'])
+    }
 }
 </script>
 
