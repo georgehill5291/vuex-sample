@@ -8,11 +8,7 @@
                 </div>
             </router-link>
         </div>
-        <div
-            class="d-flex portal-blog-item"
-            v-for="blog in blogs"
-            :key="blog.id"
-        >
+        <div class="portal-blog-item" v-for="blog in blogs" :key="blog.id">
             <div class="p-2 portal-blog-item-data">
                 <div class="h4">{{ blog.title }}</div>
                 <div
@@ -101,11 +97,18 @@ export default {
 }
 
 .portal-blog-item {
+    display: flex;
     flex: 1;
 }
 
 .portal-blog-item-data {
     flex: 1;
     text-align: left;
+}
+
+@media (max-width: 768px) {
+    .portal-blog-item {
+        display: block;
+    }
 }
 </style>

@@ -75,10 +75,4 @@ export default {
 .left-sidebar.open {
     width: 200px;
 }
-
-@media (max-width: 768px) {
-    .left-sidebar {
-        height: 100vh;
-    }
-}
 </style>

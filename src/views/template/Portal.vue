@@ -17,7 +17,7 @@
     flex: 1;
 
     float: left;
-    // width: 100%;
+    width: 100%;
     padding: 0px 0px 0px 80px;
     min-height: 500px;
     background: #fafafb;
