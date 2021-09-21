@@ -1,65 +1,34 @@
 <template>
-    <div class="carousel-blog pb-3">
-        <h3 class="text-left pl-4 pt-3 text-white font-weight-bold">Noted</h3>
-        <div id="carouselBlog" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <!-- start -->
-                <div
-                    :class="row == 1 ? 'carousel-item active' : 'carousel-item'"
-                    v-for="row in nrows"
-                    :key="row"
-                >
-                    <div class="cards-wrapper">
-                        <template v-for="(col, i) in 3">
-                            <div
-                                class="card"
-                                v-bind:key="col"
-                                v-if="
-                                    blogs[(row - 1) * 3 + i] &&
-                                        blogs[(row - 1) * 3 + i].title &&
-                                        blogs[(row - 1) * 3 + i].description
-                                "
-                            >
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{ blogs[(row - 1) * 3 + i].title }}
-                                    </h5>
-                                    <p
-                                        class="card-text"
-                                        v-html="
-                                            $options.filters.truncate(
-                                                blogs[(row - 1) * 3 + i].description,
-                                                40
-                                            )
-                                        "
-                                    ></p>
-                                    <router-link
-                                        :to="`/blogs/${blogs[(row - 1) * 3 + i]._id}`"
-                                        class="btn btn-primary"
-                                    >
-                                        Watch more
-                                    </router-link>
-                                </div>
-                            </div>
-                        </template>
+    <div class="container-fluid carousel-blog ">
+        <h3 class="px-3 py-3 text-left text-white">Noted</h3>
+        <div class="owl-carousel owl-theme">
+            <div v-for="item in blogs" :key="item._id">
+                <div class="blog-item">
+                    <div class="card m-3">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ item.title }}
+                            </h5>
+                            <p
+                                class="card-text"
+                                v-html="$options.filters.truncate(item.description, 40)"
+                            ></p>
+                        </div>
+                        <router-link :to="`/blogs/${item._id}`" class="btn btn-primary">
+                            Watch more
+                        </router-link>
                     </div>
                 </div>
-                <!-- end -->
             </div>
-            <a class="carousel-control-prev" href="#carouselBlog" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselBlog" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
     </div>
 </template>
 
 <script>
+import 'owl.carousel/dist/assets/owl.carousel.css'
+import 'owl.carousel'
 import { mapActions, mapGetters } from 'vuex'
+import Vue from 'vue'
 export default {
     name: 'CarouselBlog',
     computed: {
@@ -73,65 +42,58 @@ export default {
     },
     methods: {
         ...mapActions(['getPublicBlogs'])
+    },
+    watch: {
+        blogs() {
+            Vue.nextTick(function() {
+                let owl = window.$('.owl-carousel')
+                owl.owlCarousel({
+                    items: 3,
+                    singleItem: true,
+                    loop: true,
+                    responsive: {
+                        0: {
+                            items: 1,
+                            nav: true
+                        },
+                        600: {
+                            items: 3,
+                            nav: false
+                        },
+                        1000: {
+                            items: 5,
+                            nav: true,
+                            loop: false,
+                            margin: 20
+                        }
+                    }
+                })
+            })
+        }
     }
 }
 </script>
 
 <style scoped lang="scss">
-.cards-wrapper {
-    display: flex;
-    justify-content: center;
-
-    .card-wrapper-2 {
-        flex: 1;
-        width: 100vw;
-    }
-
-    .card {
-        border-radius: 10px;
-        flex: 1;
-    }
-
-    .card-body {
-        display: flex;
-        flex-direction: column;
-        height: 200px;
-    }
-
-    a.btn {
-        margin-top: auto;
-    }
-}
-.card img {
-    max-width: 100%;
-    max-height: 100%;
-}
-.card {
-    margin: 0 0.5em;
-    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
-    border: none;
-    border-radius: 0;
-}
-.carousel-inner {
-    padding: 1em;
-}
-.carousel-control-prev,
-.carousel-control-next {
-    background-color: #e1e1e1;
-    width: 5vh;
-    height: 5vh;
-    border-radius: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
 .carousel-blog {
     background: url('https://g-node-test.s3.ap-southeast-1.amazonaws.com/5eb3545872f01216421f2e54a1705d46-banner');
 }
 
-@media (min-width: 768px) {
-    .card img {
-        height: 11em;
+.blog-item {
+    flex: 1;
+    background: white;
+    height: 100%;
+
+    .card {
+        border: none;
+        height: 250px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    a.btn {
+        width: 100%;
+        margin-top: auto;
     }
 }
 </style>

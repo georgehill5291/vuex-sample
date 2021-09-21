@@ -27,6 +27,9 @@ Vue.filter('truncate', function(value, limit) {
 })
 
 new Vue({
+    $: 'jquery',
+    jQuery: 'jquery',
+    'window.jQuery': 'jquery',
     render: h => h(App),
     router,
     store
