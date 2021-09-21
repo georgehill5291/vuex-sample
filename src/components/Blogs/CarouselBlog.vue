@@ -1,6 +1,12 @@
 <template>
     <div class="container-fluid carousel-blog ">
-        <h3 class="px-3 py-3 text-left text-white">Noted</h3>
+        <h3 class="px-3 pt-3 text-left text-white">Noted</h3>
+        <div class="text-left">
+            <router-link :to="`/blogs`" class="btn btn-secondary text-left mx-3">
+                View All
+            </router-link>
+        </div>
+
         <div class="owl-carousel owl-theme">
             <div v-for="item in blogs" :key="item._id">
                 <div class="blog-item">
@@ -11,7 +17,7 @@
                             </h5>
                             <p
                                 class="card-text"
-                                v-html="$options.filters.truncate(item.description, 40)"
+                                v-html="$options.filters.truncate(item.description, 80)"
                             ></p>
                         </div>
                         <router-link :to="`/blogs/${item._id}`" class="btn btn-primary">

@@ -5,9 +5,7 @@
             <span class="menu-nav-title">Portal</span>
         </div>
         <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" @click="closeNav()"
-                >&times;</a
-            >
+            <a href="javascript:void(0)" class="closebtn" @click="closeNav()">&times;</a>
             <router-link to="/portal/sample-vuex">Sample Vuex</router-link>
             <router-link to="/portal/blog-listing">Blog</router-link>
             <a href="javascript:void(0)" @click="logout">Logout</a>

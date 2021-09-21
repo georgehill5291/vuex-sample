@@ -78,28 +78,29 @@ const routes = [
         name: 'Portal',
         components: {
             default: Portal,
-            header: PortalHeader
+            header: PortalHeader,
+            leftNavbar: LeftNavbar
         },
         children: [
             {
                 name: 'SampleVuex',
                 path: 'sample-vuex',
-                components: { default: SampleVuex, leftNavbar: LeftNavbar }
+                components: { default: SampleVuex }
             },
             {
                 name: 'BlogListing',
                 path: 'blog-listing',
-                components: { default: BlogListing, leftNavbar: LeftNavbar }
+                components: { default: BlogListing }
             },
             {
                 name: 'EditBlog',
                 path: 'blog-listing/edit/:id',
-                components: { default: EditBlog, leftNavbar: LeftNavbar }
+                components: { default: EditBlog }
             },
             {
                 name: 'AddBlog',
                 path: 'blog-listing/add',
-                components: { default: AddBlog, leftNavbar: LeftNavbar }
+                components: { default: AddBlog }
             }
         ]
     }

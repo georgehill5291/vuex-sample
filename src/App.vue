@@ -2,6 +2,7 @@
     <div id="app">
         <router-view name="header" />
         <router-view name="navbar" />
+        <router-view name="leftNavbar" />
         <router-view />
         <router-view name="footer" />
     </div>
