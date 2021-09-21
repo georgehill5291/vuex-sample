@@ -95,6 +95,10 @@ export default {
         height: 250px;
         justify-content: center;
         align-items: center;
+
+        .card-body {
+            word-break: break-word;
+        }
     }
 
     a.btn {

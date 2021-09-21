@@ -20,13 +20,13 @@
         </div>
         <div class="collapse navbar-collapse mr-lg-5" id="navbarText">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li :class="currentRouteName === 'Home' ? 'nav-item active' : 'nav-item'">
                     <router-link to="/" class="nav-link">Home</router-link>
                 </li>
-                <li class="nav-item">
+                <li :class="currentRouteName === 'About' ? 'nav-item active' : 'nav-item'">
                     <router-link to="/about" class="nav-link">About</router-link>
                 </li>
-                <li class="nav-item">
+                <li :class="currentRouteName === 'PublicBlogs' ? 'nav-item active' : 'nav-item'">
                     <router-link to="/blogs" class="nav-link">Blog</router-link>
                 </li>
                 <li class="nav-item">
@@ -39,7 +39,12 @@
 
 <script>
 export default {
-    name: 'PublicNav'
+    name: 'PublicNav',
+    computed: {
+        currentRouteName() {
+            return this.$route.name
+        }
+    }
 }
 </script>
 
