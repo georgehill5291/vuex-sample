@@ -18,7 +18,7 @@
 
     float: left;
     width: 100%;
-    padding: 0px 0px 0px 80px;
+    padding: 0px 0px 0px 50px;
     min-height: 500px;
     background: #fafafb;
 }

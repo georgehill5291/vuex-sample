@@ -16,6 +16,7 @@ import EditBlog from '../components/Blogs/EditBlog'
 import ViewBlog from '../components/Blogs/ViewBlog'
 import PortalHeader from '../components/shared/PortalHeader.vue'
 import LeftNavbar from '../components/shared/LeftNavbar.vue'
+import Footer from '../components/shared/Footer.vue'
 // import { isLoggedIn } from "../util/authCommon";
 
 Vue.use(VueRouter)
@@ -26,7 +27,8 @@ const routes = [
         name: 'Public',
         components: {
             default: Public,
-            header: PublicNav
+            header: PublicNav,
+            footer: Footer
         },
         children: [
             {
@@ -116,10 +118,7 @@ router.beforeResolve(async (to, from, next) => {
     }
     if (to.name == 'Login' && router.app.$store.getters.isAuthenticated) {
         next({ path: '/portal' })
-    } else if (
-        !to.meta.allowAnonymous &&
-        !router.app.$store.getters.isAuthenticated
-    ) {
+    } else if (!to.meta.allowAnonymous && !router.app.$store.getters.isAuthenticated) {
         next({
             path: '/login',
             query: { redirect: to.fullPath }

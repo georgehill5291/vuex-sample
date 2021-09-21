@@ -55,11 +55,7 @@ export default {
     name: 'CarouselBanner'
 }
 
-$(document).ready(function() {
-    $('#carouselExampleSlidesOnly').carousel({
-        interval: 2000
-    })
-})
+$(document).ready(function() {})
 </script>
 
 <style></style>
