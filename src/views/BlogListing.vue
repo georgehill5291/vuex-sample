@@ -8,10 +8,11 @@
                 </div>
             </router-link>
         </div>
-        <div class="portal-blog-item" v-for="blog in blogs" :key="blog.id">
+        <div class="p-2 portal-blog-item" v-for="blog in blogs" :key="blog.id">
             <div class="p-2 portal-blog-item-data">
                 <div class="h4">{{ blog.title }}</div>
                 <div
+                    class="text-break"
                     v-html="$options.filters.truncate(blog.description, 100)"
                 ></div>
             </div>
@@ -21,10 +22,7 @@
                         <b-icon icon="eye"></b-icon>
                     </button>
                 </router-link>
-                <router-link
-                    :to="`/portal/blog-listing/edit/${blog._id}`"
-                    class="mr-2"
-                >
+                <router-link :to="`/portal/blog-listing/edit/${blog._id}`" class="mr-2">
                     <button>
                         <b-icon icon="pencil"></b-icon>
                     </button>
@@ -99,6 +97,7 @@ export default {
 .portal-blog-item {
     display: flex;
     flex: 1;
+    border-bottom: solid 1px black;
 }
 
 .portal-blog-item-data {
