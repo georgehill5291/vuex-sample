@@ -4,27 +4,27 @@ import router from '../../router'
 const blogModule = {
     state: {
         currentBlog: { title: '', description: '' },
-        blogs: []
+        blogs: [],
+        pagination: null
     },
     getters: {
         blogs: state => state.blogs,
-        currentBlog: state => state.currentBlog
+        currentBlog: state => state.currentBlog,
+        pagination: state => state.pagination
     },
     actions: {
         async getBlogs({ commit }) {
             try {
-                const response = await axios.get(
-                    `${process.env.VUE_APP_PROD_API_URL}/blogs`
-                )
+                const response = await axios.get(`${process.env.VUE_APP_PROD_API_URL}/blogs`)
                 commit('GET_BLOGS', response.data)
             } catch (error) {
                 console.log('error', error)
             }
         },
-        async getPublicBlogs({ commit }) {
+        async getPublicBlogs({ commit }, getBlogInput) {
             try {
                 const response = await axios.get(
-                    `${process.env.VUE_APP_PROD_API_URL}/blogs/public`
+                    `${process.env.VUE_APP_PROD_API_URL}/blogs/public?title=${getBlogInput.title}&offset=${getBlogInput.offset}&length=${getBlogInput.length}`
                 )
                 commit('GET_PUBLIC_BLOGS', response.data)
             } catch (error) {
@@ -65,9 +65,7 @@ const blogModule = {
         },
         async deleteBlog({ commit }, blogId) {
             try {
-                await axios.delete(
-                    `${process.env.VUE_APP_PROD_API_URL}/blogs/${blogId}`
-                )
+                await axios.delete(`${process.env.VUE_APP_PROD_API_URL}/blogs/${blogId}`)
                 commit('DELETE_BLOG', blogId)
             } catch (error) {
                 console.log('error', error)
@@ -79,7 +77,8 @@ const blogModule = {
             state.blogs = response.blogs
         },
         GET_PUBLIC_BLOGS(state, response) {
-            state.blogs = response.blogs
+            state.blogs = response.blogs.docs
+            state.pagination = response.blogs
         },
         ADD_BLOG(state, response) {
             state.blogs.unshift(response.blog)

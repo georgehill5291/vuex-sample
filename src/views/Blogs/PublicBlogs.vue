@@ -1,13 +1,28 @@
 <template>
     <div class="public-blogs">
         <h3>Blogs</h3>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group text-left px-2">
+                    <label class="text-left">Title</label>
+                    <input v-model="title" placeholder="tilte" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mx-2 text-left">
+                <button class="" @click="onSubmit">Find</button>
+                <button class="mx-2" @click="onReset">Reset</button>
+            </div>
+            <div class="col-md-4 mx-2 text-left"></div>
+        </div>
+
         <div v-for="blog in blogs" :key="blog.id">
             <div class="d-flex text-left blog-item">
                 <div class="p-2">
                     <div class="h4">{{ blog.title }}</div>
-                    <div
-                        v-html="$options.filters.truncate(blog.description, 20)"
-                    ></div>
+                    <div v-html="$options.filters.truncate(blog.description, 20)"></div>
                 </div>
                 <div class="view-button-wrapper">
                     <div @click="copyClipboard(blog._id)">
@@ -23,6 +38,37 @@
                 </div>
             </div>
         </div>
+
+        <nav aria-label="Page navigation example" class="mx-2">
+            <ul class="pagination">
+                <li class="page-item" v-if="pagination && pagination.hasPrevPage">
+                    <a
+                        class="page-link"
+                        href="javascript:void(0)"
+                        @click="handlePagination(pagination.prevPage)"
+                        >Previous</a
+                    >
+                </li>
+                <template v-if="pagination">
+                    <li class="page-item" v-for="item in pagination.totalPages" :key="item">
+                        <a
+                            class="page-link"
+                            href="javascript:void(0)"
+                            @click="handlePagination(item)"
+                            >{{ item }}</a
+                        >
+                    </li>
+                </template>
+                <li class="page-item" v-if="pagination && pagination.hasNextPage">
+                    <a
+                        class="page-link"
+                        href="javascript:void(0)"
+                        @click="handlePagination(pagination.nextPage)"
+                        >Next</a
+                    >
+                </li>
+            </ul>
+        </nav>
     </div>
 </template>
 
@@ -30,9 +76,14 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'PublicBlogs',
-    computed: mapGetters(['blogs']),
+    computed: mapGetters(['blogs', 'pagination']),
+    data() {
+        return {
+            title: ''
+        }
+    },
     created() {
-        this.getPublicBlogs()
+        this.getPublicBlogs({ title: '', offset: 0, length: 5 })
     },
     methods: {
         ...mapActions(['getPublicBlogs']),
@@ -45,6 +96,19 @@ export default {
             } catch (error) {
                 alert('Copied the text failed')
             }
+        },
+        onSubmit(event) {
+            event.preventDefault()
+            this.getPublicBlogs({ title: this.title, offset: 0, length: 5 })
+        },
+        onReset(event) {
+            event.preventDefault()
+            this.title = ''
+            this.onSubmit(event)
+        },
+        handlePagination(page) {
+            // event.preventDefault()
+            this.getPublicBlogs({ title: this.title, offset: (page - 1) * 5, length: 5 })
         }
     }
 }

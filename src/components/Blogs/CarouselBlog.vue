@@ -44,7 +44,7 @@ export default {
         }
     },
     created() {
-        this.getPublicBlogs()
+        this.getPublicBlogs({ title: '', offset: 0, length: 10 })
     },
     methods: {
         ...mapActions(['getPublicBlogs'])
