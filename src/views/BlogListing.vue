@@ -27,10 +27,10 @@
                         <b-icon icon="pencil"></b-icon>
                     </button>
                 </router-link>
-                <a href="javascript:void(0)">
+                <!-- <a href="javascript:void(0)">
                     <button @click="deleteBlog(blog._id)">
                         <b-icon icon="trash"></b-icon></button
-                ></a>
+                ></a> -->
             </div>
 
             <!-- <div class="col pr-0">
